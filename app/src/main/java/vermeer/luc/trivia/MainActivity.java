@@ -51,7 +51,6 @@ public class MainActivity extends AppCompatActivity implements TriviaHelper.Call
         int selectedId = radioGroup.getCheckedRadioButtonId();
         RadioButton radioButton = (RadioButton) findViewById(selectedId);
         boolean correctAnswer = currentQuestion.getAnswer();
-//        Toast.makeText(this, radioButton.getText(), Toast.LENGTH_LONG).show();
         if (radioButton.getText() == "True") {
             rightAnswer();
         } else if (radioButton.getText() == "False") {
@@ -59,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements TriviaHelper.Call
         } else {
             wrongAnswer();
         }
+        intent.putExtra("player", player);
         startActivity(intent);
         finish();
     }
@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity implements TriviaHelper.Call
         player.setLives(player.getLives() - 1);
         if (player.getLives() == 0) {
             // end game
+            Intent intent = new Intent(MainActivity.this, GameOverActivity.class);
+            intent.putExtra("player", player);
+            startActivity(intent);
+            finish();
+
         }
     }
 
